@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#6557d9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Holo 強 2026">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+<title>Holo 強 2026｜賽事結束倒數</title>
+<style>
+:root{color-scheme:light dark;--bg:#f3f4fb;--card:#fff;--text:#20243a;--muted:#747b92;--line:#e0e3ee;--accent:#6557d9;--accent2:#9f7aea;--tile:#eeecff}
+@media(prefers-color-scheme:dark){:root{--bg:#10121a;--card:#1b1e2a;--text:#f4f4ff;--muted:#a7adc2;--line:#34394b;--accent:#aaa0ff;--accent2:#d3a7ff;--tile:#302b50}}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,rgba(127,113,255,.15),transparent 50%),var(--bg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);display:grid;place-items:center;padding:18px}
+.wrap{width:min(760px,100%)}.hero{text-align:center;padding:12px 0 22px}.eyebrow{font-weight:750;letter-spacing:.14em;color:var(--accent);font-size:12px}h1{font-size:clamp(28px,6vw,44px);line-height:1.15;margin:12px 0 8px}.lead{color:var(--muted);margin:0;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(16px,4vw,30px);box-shadow:0 16px 50px rgba(33,31,73,.08)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.tile{background:var(--tile);border:1px solid color-mix(in srgb,var(--accent) 12%,transparent);border-radius:16px;padding:18px 6px;text-align:center;min-width:0}.num{font-variant-numeric:tabular-nums;font-size:clamp(30px,7.5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.04em}.unit{font-size:12px;color:var(--muted);margin-top:8px}.target{text-align:center;margin:20px 0 0;color:var(--muted);font-size:14px}.target strong{color:var(--text)}.state{text-align:center;min-height:24px;color:var(--accent);font-weight:700;margin-top:12px}.settings{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}.settings h2{font-size:16px;margin:0 0 10px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input{width:100%;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}button{font:inherit;font-weight:700;border:0;border-radius:11px;padding:11px 15px;background:var(--accent);color:white;cursor:pointer}.secondary{background:var(--bg);color:var(--text);border:1px solid var(--line)}.foot{text-align:center;color:var(--muted);font-size:12px;line-height:1.6;margin:14px 6px 0}
+@media(max-width:420px){.grid{gap:6px}.tile{padding:15px 3px;border-radius:12px}.num{font-size:clamp(25px,7vw,38px)}.unit{font-size:11px}.fields{grid-template-columns:1fr}}
+
+.app-nav{max-width:900px;margin:0 auto 16px;display:flex;gap:8px;flex-wrap:wrap;padding:0 2px}
+.app-nav a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-size:14px;font-weight:700;padding:10px 13px;border:1px solid var(--line);border-radius:11px;color:var(--text);background:var(--card)}
+.app-nav a.home{background:var(--accent);color:#fff;border-color:var(--accent)}
+.app-nav a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+</style>
+</head>
+<body>
+<nav class="app-nav" aria-label="工具導覽"><a class="home" href="./index.html">⌂ 工具首頁</a><a href="./members.html">☷ 64 強成員複製</a><a href="./countdown.html">◷ 賽事結束倒數</a></nav><main class="wrap">
+<header class="hero">
+<div class="eyebrow">HOLO 強 2026</div>
+<h1>🏆 賽事結束倒數</h1>
+<p class="lead">一路投到最後，直到冠軍誕生。</p>
+</header>
+<section class="card" aria-live="polite">
+<div class="grid">
+<div class="tile"><div class="num" id="days">--</div><div class="unit">天</div></div>
+<div class="tile"><div class="num" id="hours">--</div><div class="unit">時</div></div>
+<div class="tile"><div class="num" id="minutes">--</div><div class="unit">分</div></div>
+<div class="tile"><div class="num" id="seconds">--</div><div class="unit">秒</div></div>
+</div>
+<div class="target">預定結束時間：<strong id="targetLabel">2026/11/13 23:59（台灣時間）</strong></div>
+<div class="state" id="state">距離冠軍誕生，時間正在流逝……</div>
+<div class="settings">
+<h2>⚙️ 設定賽事結束時間</h2>
+<div class="fields">
+<div class="field"><label for="date">結束日期</label><input id="date" type="date" value="2026-11-13"></div>
+<div class="field"><label for="time">結束時間（台灣時間）</label><input id="time" type="time" value="23:59"></div>
+</div>
+<div class="actions"><button id="apply">套用截止時間</button><button class="secondary" id="reset">恢復暫定時間</button></div>
+</div>
+</section>
+<p class="foot">倒數以本裝置的時間為基礎，每秒更新。11/13 23:59 為暫定估算，可在上方修改；此頁不會自動發布或更改 Threads 貼文。</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const defaultDate="2026-11-13",defaultTime="23:59";
+let target=new Date("2026-11-13T23:59:00+08:00");
+const pad=n=>String(n).padStart(2,"0");
+function formatTarget(d){return `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}（台灣時間）`}
+function render(){
+ const now=Date.now(),diff=target.getTime()-now;
+ $("targetLabel").textContent=formatTarget(target);
+ if(diff<=0){["days","hours","minutes","seconds"].forEach(id=>$(id).textContent="00");$("state").textContent="🎉 賽事時間已到！確認最後投票並公布冠軍。";return}
+ const s=Math.floor(diff/1000),days=Math.floor(s/86400),hours=Math.floor(s%86400/3600),mins=Math.floor(s%3600/60),secs=s%60;
+ $("days").textContent=String(days);$("hours").textContent=pad(hours);$("minutes").textContent=pad(mins);$("seconds").textContent=pad(secs);
+ $("state").textContent="距離冠軍誕生，時間正在流逝……";
+}
+function apply(){
+ const d=$("date").value,t=$("time").value;
+ if(!d||!t){$("state").textContent="請選擇結束日期和時間。";return}
+ const candidate=new Date(`${d}T${t}:00+08:00`);
+ if(Number.isNaN(candidate.getTime())){$("state").textContent="日期或時間格式不正確。";return}
+ target=candidate;render();
+}
+$("apply").addEventListener("click",apply);
+$("reset").addEventListener("click",()=>{$("date").value=defaultDate;$("time").value=defaultTime;target=new Date("2026-11-13T23:59:00+08:00");render()});
+render();setInterval(render,1000);
+</script><script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{})); }</script>
+</body></html>

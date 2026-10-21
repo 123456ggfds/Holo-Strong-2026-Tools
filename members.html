@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#6557d9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Holo 強 2026">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+<title>Holo 強 2026｜64 強成員複製工具</title>
+<style>
+:root{color-scheme:light dark;--bg:#f5f6fa;--card:#fff;--text:#202638;--muted:#687085;--line:#dfe3ec;--accent:#6557d9;--soft:#eeecff}
+@media(prefers-color-scheme:dark){:root{--bg:#11131a;--card:#1b1e29;--text:#f1f3fa;--muted:#a9b0c3;--line:#343949;--accent:#aaa0ff;--soft:#302c50}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:900px;margin:auto;padding:22px 14px 48px}h1{font-size:clamp(23px,4vw,32px);margin:0 0 8px}.sub{color:var(--muted);margin:0 0 18px;font-size:14px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}button{font:inherit;border:1px solid var(--line);border-radius:10px;padding:10px 13px;background:var(--card);color:var(--text);cursor:pointer}
+.groupbtn.active{background:var(--accent);color:white;border-color:var(--accent)}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}.panel h2{margin:0;font-size:20px}.hint{color:var(--muted);font-size:13px}
+.members{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:10px}.member{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0}
+.name{font-weight:600;overflow-wrap:anywhere}.copy{flex-shrink:0;background:var(--soft);border-color:transparent;padding:8px 10px;font-size:13px}
+.status{min-height:22px;color:var(--muted);font-size:13px;margin-top:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}footer{color:var(--muted);font-size:12px;margin-top:16px;line-height:1.6}
+
+.app-nav{max-width:900px;margin:0 auto 16px;display:flex;gap:8px;flex-wrap:wrap;padding:0 2px}
+.app-nav a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-size:14px;font-weight:700;padding:10px 13px;border:1px solid var(--line);border-radius:11px;color:var(--text);background:var(--card)}
+.app-nav a.home{background:var(--accent);color:#fff;border-color:var(--accent)}
+.app-nav a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+</style></head><body>
+<nav class="app-nav" aria-label="工具導覽"><a class="home" href="./index.html">⌂ 工具首頁</a><a href="./members.html">☷ 64 強成員複製</a><a href="./countdown.html">◷ 賽事結束倒數</a></nav><main>
+<h1>Holo 強 2026｜64 強成員複製工具</h1>
+<p class="sub">原本是英文名稱的成員只顯示英文；原本以日文名稱列出的成員，補上英文名稱。</p>
+<div class="controls" id="groups"></div>
+<section class="panel"><div class="panelhead"><h2 id="heading">A 組</h2><span class="hint">共 4 位成員</span></div>
+<div class="members" id="members"></div><div class="status" id="status" aria-live="polite"></div>
+<div class="actions"><button id="copyGroup">複製本組名稱</button><button id="copyAll">複製全部 64 位</button></div></section>
+<footer>沿用先前的暫定分組，未重新抽籤；這次只調整名稱顯示格式。</footer></main>
+<script>
+const groups={"A": ["Gigi Murin", "Nerissa Ravencroft", "兎田ぺこら (Usada Pekora)", "星街すいせい (Hoshimachi Suisei)"], "B": ["Mori Calliope", "熱千めら (Achichi Mela)", "湊あくあ (Minato Aqua)", "儒烏風亭らでん (Juufuutei Raden)"], "C": ["Kureiji Ollie", "大神ミオ (Ookami Mio)", "大空スバル (Oozora Subaru)", "Fuwawa Abyssgard"], "D": ["轟はじめ (Todoroki Hajime)", "Kaela Kovalskia", "Ouro Kronii", "Mococo Abyssgard"], "E": ["桃鈴ねね (Momosuzu Nene)", "さくらみこ (Sakura Miko)", "百鬼あやめ (Nakiri Ayame)", "猫又おかゆ (Nekomata Okayu)"], "F": ["音乃瀬奏 (Otonose Kanade)", "宙科そぴあ (Sorashina Sopia)", "IRyS", "ときのそら (Tokino Sora)"], "G": ["戌神ころね (Inugami Korone)", "潤羽るしあ (Uruha Rushia)", "白上フブキ (Shirakami Fubuki)", "癒月ちょこ (Yuzuki Choco)"], "H": ["Airani Iofifteen", "Moona Hoshinova", "Vestia Zeta", "Cecilia Immergreen"], "I": ["Gawr Gura", "白銀ノエル (Shirogane Noel)", "Watson Amelia", "風真いろは (Kazama Iroha)"], "J": ["鈴鳴つづり (Suzuna Tsuzuri)", "Hakos Baelz", "紫咲シオン (Murasaki Shion)", "常闇トワ (Tokoyami Towa)"], "K": ["宝鐘マリン (Houshou Marine)", "ロボ子さん (Robocosan)", "赤井はあと (Akai Haato)", "Nanashi Mumei"], "L": ["綺々羅々ヴィヴィ (Kikirara Vivi)", "Kobo Kanaeru", "沙花叉クロヱ (Sakamata Chloe)", "Takanashi Kiara"], "M": ["桐生ココ (Kiryu Coco)", "ラプラス・ダークネス (La+ Darknesss)", "夏色まつり (Natsuiro Matsuri)", "天音かなた (Amane Kanata)"], "N": ["博衣こより (Hakui Koyori)", "水宮枢 (Mizumiya Su)", "Ceres Fauna", "一条莉々華 (Ichijou Ririka)"], "O": ["Shiori Novella", "AZKi", "姫森ルーナ (Himemori Luna)", "Ninomae Ina'nis"], "P": ["Koseki Bijou", "Raora Panthera", "Elizabeth Rose Bloodflame", "響咲リオナ (Isaki Riona)"]};let current="A";const gr=document.getElementById("groups"),mr=document.getElementById("members"),status=document.getElementById("status"),heading=document.getElementById("heading");
+async function copyText(text,label){try{await navigator.clipboard.writeText(text);status.textContent="已複製："+label}catch(e){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();const ok=document.execCommand("copy");t.remove();status.textContent=ok?"已複製："+label:"複製失敗，請檢查瀏覽器權限。"}}
+function render(){heading.textContent=current+" 組";mr.innerHTML="";groups[current].forEach(name=>{const row=document.createElement("div");row.className="member";const span=document.createElement("span");span.className="name";span.textContent=name;const btn=document.createElement("button");btn.className="copy";btn.textContent="單獨複製";btn.onclick=()=>copyText(name,name);row.append(span,btn);mr.append(row)});[...gr.children].forEach(b=>{b.classList.toggle("active",b.dataset.group===current);b.setAttribute("aria-pressed",b.dataset.group===current?"true":"false")});status.textContent=""}
+Object.keys(groups).forEach(g=>{const b=document.createElement("button");b.className="groupbtn";b.textContent=g+" 組";b.dataset.group=g;b.onclick=()=>{current=g;render()};gr.append(b)});
+document.getElementById("copyGroup").onclick=()=>copyText(groups[current].join("\n"),current+" 組");document.getElementById("copyAll").onclick=()=>copyText(Object.values(groups).flat().join("\n"),"全部 64 位");render();
+</script><script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{})); }</script>
+</body></html>

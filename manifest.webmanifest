@@ -1,0 +1,53 @@
+{
+  "id": "./index.html",
+  "name": "Holo 強 2026 工具箱",
+  "short_name": "Holo 強 2026",
+  "description": "Holo 強 2026 成員名稱複製與賽事結束倒數工具。",
+  "lang": "zh-TW",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f5fb",
+  "theme_color": "#6557d9",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "64 強成員複製",
+      "short_name": "成員複製",
+      "url": "./members.html",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "賽事結束倒數",
+      "short_name": "賽事倒數",
+      "url": "./countdown.html",
+      "icons": [
+        {
+          "src": "./icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

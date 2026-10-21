@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#6557d9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Holo 強 2026">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>Holo 強 2026｜工具首頁</title>
+<style>
+:root{color-scheme:light dark;--bg:#f4f5fb;--card:#fff;--text:#22263a;--muted:#70778c;--line:#e0e3ef;--accent:#6557d9;--accent-soft:#eeecff}
+@media(prefers-color-scheme:dark){:root{--bg:#10121a;--card:#1b1e2a;--text:#f4f4ff;--muted:#a7adc2;--line:#34394b;--accent:#aaa0ff;--accent-soft:#302b50}}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,rgba(127,113,255,.16),transparent 46%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:900px;margin:auto;padding:28px 16px 48px}.brand{display:flex;align-items:center;gap:14px;margin:4px 0 28px}.mark{width:58px;height:58px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(135deg,#6657dc,#aa7ee8);color:white;font-size:28px;box-shadow:0 9px 26px #6557d930}.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:800}.brand h1{margin:4px 0 0;font-size:clamp(26px,5vw,39px);line-height:1.1}.intro{color:var(--muted);line-height:1.7;margin:0 0 24px;max-width:650px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{display:flex;flex-direction:column;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;text-decoration:none;color:var(--text);transition:transform .15s,border-color .15s;min-height:225px}.card:hover{transform:translateY(-2px);border-color:var(--accent)}.icon{display:grid;place-items:center;width:48px;height:48px;background:var(--accent-soft);border-radius:15px;font-size:24px}.card h2{margin:0;font-size:21px}.card p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}.open{margin-top:auto;display:flex;align-items:center;justify-content:space-between;color:var(--accent);font-weight:750;font-size:14px}.install{margin-top:18px;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:18px}.install h2{font-size:16px;margin:0 0 8px}.install p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}.foot{margin-top:20px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}
+@media(max-width:560px){.wrap{padding:22px 13px 36px}.cards{grid-template-columns:1fr}.card{min-height:0;padding:19px}.brand{align-items:flex-start}.mark{flex:0 0 52px;width:52px;height:52px;border-radius:16px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="brand"><div class="mark" aria-hidden="true">✦</div><div><div class="eyebrow">Fan Tournament Toolkit</div><h1>Holo 強 2026</h1></div></header>
+<p class="intro">賽事小工具集中在這裡。可以複製 64 強成員英文名稱，也可以查看距離賽事結束還有多久。建議將此頁加入手機主畫面，方便快速開啟。</p>
+<section class="cards" aria-label="工具列表">
+<a class="card" href="./members.html"><div class="icon" aria-hidden="true">☷</div><h2>64 強成員複製工具</h2><p>切換 A～P 組，逐一複製成員名稱，也可以一次複製本組或全部名單。</p><div class="open"><span>開啟工具</span><span>→</span></div></a>
+<a class="card" href="./countdown.html"><div class="icon" aria-hidden="true">◷</div><h2>賽事結束倒數</h2><p>每秒更新剩餘天、時、分、秒，並可自行修改預定結束日期與時間。</p><div class="open"><span>開啟倒數</span><span>→</span></div></a>
+</section>
+<section class="install"><h2>📱 加入手機主畫面</h2><p><strong>iPhone：</strong>使用 Safari 開啟此網站，點選「分享」→「加入主畫面」。<br><strong>Android：</strong>使用 Chrome 開啟此網站，點選右上角選單 →「加到主畫面」或「安裝應用程式」。<br>網站需先發布到 HTTPS 網址，才能使用完整的主畫面安裝與離線快取功能。</p></section>
+<p class="foot">Holo 強 2026｜粉絲活動輔助工具<br>名單使用目前對話中的暫定分組，正式晉級資格尚未重新核對。</p>
+</main><script>if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}</script></body></html>
